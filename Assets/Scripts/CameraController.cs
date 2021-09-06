@@ -3,20 +3,17 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("Look")]
-    [SerializeField, Range(1, 10)] private float lookSpeed = 2.0f;
-    [SerializeField, Range(1, 180)] private float upperLookLimit = 80.0f;
-    [SerializeField, Range(-90, 180)] private float lowerLookLimit = 80.0f;
-    [SerializeField, Range(1, 180)] private float leftLookLimit = 80.0f;
-    [SerializeField, Range(1, 180)] private float rightLookLimit = 80.0f;
-    private Camera playerCamera;
+    [SerializeField, Range(1, 10)] private float speed;
+    [SerializeField, Range(1, 180)] private float upLimit;
+    [SerializeField, Range(-90, 180)] private float downLimit;
+    [SerializeField, Range(1, 180)] private float leftLimit;
+    [SerializeField, Range(1, 180)] private float rightLimit;
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
 
 
     private void Start()
     {
-        playerCamera = GetComponent<Camera>();
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -28,13 +25,18 @@ public class CameraController : MonoBehaviour
 
     private void Look()
     {
-        rotationX -= Input.GetAxis("Mouse Y") * lookSpeed;
-        rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
+        // clamps up and down movement
+        rotationX -= Input.GetAxis("Mouse Y") * speed;
+        rotationX = Mathf.Clamp(rotationX, -upLimit, downLimit);
 
-        rotationY += Input.GetAxis("Mouse X") * lookSpeed;
-        rotationY = Mathf.Clamp(rotationY, -leftLookLimit, rightLookLimit);
+        // clamps left and right movement
+        rotationY += Input.GetAxis("Mouse X") * speed;
+        rotationY = Mathf.Clamp(rotationY, -leftLimit, rightLimit);
 
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
-        transform.rotation *= Quaternion.Euler(Input.GetAxis("Mouse Y") * lookSpeed, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        // camera rotates locally
+        transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
+
+        // rotates the camera according the mouse position and speed 
+        transform.rotation *= Quaternion.Euler(Input.GetAxis("Mouse Y") * speed, Input.GetAxis("Mouse X") * speed, 0);
     }
 }

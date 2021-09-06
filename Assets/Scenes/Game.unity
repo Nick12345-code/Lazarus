@@ -368,11 +368,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24136b5c37a71294d8d3217ed4ab85e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookSpeed: 1
-  upperLookLimit: 90
-  lowerLookLimit: -20
-  leftLookLimit: 90
-  rightLookLimit: 90
+  speed: 1
+  upLimit: 90
+  downLimit: -20
+  leftLimit: 80
+  rightLimit: 80
 --- !u!20 &1828353878
 Camera:
   m_ObjectHideFlags: 0

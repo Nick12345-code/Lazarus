@@ -1,0 +1,6 @@
+/*
+Player is trapped in a coffin and has to escape.
+PLayer has to make noises to alert people on the surface
+
+
+*/

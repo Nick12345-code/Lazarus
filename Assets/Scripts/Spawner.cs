@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
         randomPosition = transform.TransformPoint(randomPosition * .5f);
 
         // spawn the collectable
-        GameObject collectable = Instantiate(collectables[index], randomPosition, Quaternion.identity);
+        GameObject collectable = Instantiate(collectables[Random.Range(0, 2)], randomPosition, Quaternion.identity);
         collectable.transform.SetParent(GameObject.Find("Spawner").transform);
     }
 }
